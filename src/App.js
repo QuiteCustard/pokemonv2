@@ -22,9 +22,8 @@ export default function App() {
 			//const data = await fetch(getPokemonURL.current, { signal })
 			const data = await fetch(url, { signal })
 			const { next, results } = await data.json();
-			
 			setNextURL(next);
-			setPokemon(results);
+			setPokemon(p => [...p, ...results]);
 		}
 		
 		getPokemonBatch();
@@ -36,6 +35,8 @@ export default function App() {
 		if (inView) setURL(nextUrl);
 	},[nextUrl, inView])
 
+	console.log(pokemon)
+	
 	return (
 		<>
 			<Header />
