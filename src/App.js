@@ -8,7 +8,7 @@ import './styles/css/main.css';
 export default function App() {
 	//const getPokemonURL = useRef(initialURL);
 	const [url, setURL] = useState("https://pokeapi.co/api/v2/pokemon?limit=21");
-	const [nextUrl, setNextURL] = useState();
+	const [nextUrl, setNextURL] = useState("");
 	const { ref, inView } = useInView({
 		threshold: 0
 	  });
@@ -31,6 +31,10 @@ export default function App() {
 
 		return () => controller.abort();
 	}, [url])
+
+	useEffect(() => {
+		if (inView) setURL(nextUrl);
+	},[nextUrl, inView])
 
 	return (
 		<>
