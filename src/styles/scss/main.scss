@@ -41,3 +41,9 @@ html {
     display: grid;
     grid-template-columns: repeat(auto-fit, minMax(320px, 1fr));
 }
+
+.pokemon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
