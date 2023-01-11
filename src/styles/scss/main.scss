@@ -34,5 +34,10 @@ html {
 }
 
 .hide {
-    margin-top: 110vh;
+   margin-top: 10vh;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minMax(320px, 1fr));
 }
