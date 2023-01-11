@@ -36,7 +36,7 @@ export default function App() {
 		<>
 			<Header />
 			<PokemonList pokemon={pokemon} />
-			<div ref={ref} className="hide">1</div>
+			<div ref={ref} className="hide">{inView ? 1 : 0}</div>
 		</>
 	);
 }
