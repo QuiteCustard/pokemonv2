@@ -3,7 +3,6 @@ import { getIndividualPokemon } from "../PokemonGetter";
 
 export default function PokemonList({pokemon}) {
 	const [individualPokemonData, setIndividualPokemonData] = useState([]);
-	
 	useEffect(() => {
 		const urls = pokemon.map(mon => mon.url);
 		async function getData() {
@@ -18,9 +17,9 @@ export default function PokemonList({pokemon}) {
     <div className="list">
 		{individualPokemonData.map(data => { 
 			return <div key={data.id} className="pokemon">
-				<img src={data.sprites.other.dream_world.front_default} alt={data.name + " sprite"} height="100" width="100"/>
-				<h3>#{data.id < 100 ? 0 : ''}{data.id < 10 ? 0 : ''}{data.id} - {data.name}</h3>
-			</div>
+				<img src={data.sprites.other.dream_world.front_default ? data.sprites.other.dream_world.front_default : data.sprites.front_default} alt={data.name + " sprite"} height="100" width="100"/>
+				<h3>#{data.id < 100 ? data.id < 10 ?  `00${data.id}` : `0${data.id}` : data.id } - {data.name}</h3>
+			</div> 
 		})}
     </div>
   )
