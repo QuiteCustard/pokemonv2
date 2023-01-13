@@ -47,3 +47,8 @@ html {
     align-items: center;
     flex-direction: column;
 }
+
+header {
+    position: sticky;
+    top: 0;
+}
