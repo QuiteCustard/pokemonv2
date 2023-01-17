@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getIndividualPokemon } from "../PokemonGetter";
+import { useHorizontalScroll } from "../sideScroller";
 
-export default function PokemonList({pokemon, imgStyle}) {
+export default function PokemonList({pokemon, imgStyle, listRef, inView}) {
 	const [individualPokemonData, setIndividualPokemonData] = useState([]);
+	const listScroller = useHorizontalScroll();
 
 	useEffect(() => {
 		const urls = pokemon.map(mon => mon.url);
@@ -14,7 +16,7 @@ export default function PokemonList({pokemon, imgStyle}) {
 		getData();
 	}, [pokemon])
   return (
-    <div className="list">
+    <div className="list" ref={listScroller}>
 		{individualPokemonData.map(data => { 
 			return <div key={data.id} className="pokemon">
 				<div className="image-name">
@@ -24,6 +26,7 @@ export default function PokemonList({pokemon, imgStyle}) {
 				<p>{data.id}</p>
 			</div> 
 		})}
+		<div ref={listRef} className="hide">{inView ? 1 : 0}</div>
     </div>
   )
 }

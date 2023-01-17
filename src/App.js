@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
+
 import Header from "./components/Header";
 import PokemonList from "./components/PokemonList";
 import './styles/css/main.css';
+import { useInView } from "react-intersection-observer";
+import logo from "./assets/images/logo.png";
 
 export default function App() {
 	const [url, setURL] = useState("https://pokeapi.co/api/v2/pokemon?limit=21");
 	const [nextUrl, setNextURL] = useState("");
-	const { ref, inView } = useInView({rootMargin: "1000px"});
 	const [pokemon, setPokemon] = useState([]);
-	const [initLoad, setInitLoad] = useState(false);
 	const [imgStyle, setImgStyle] = useState(localStorage.getItem("image-style") ? localStorage.getItem("image-style") : "default");
 	const imgButton = useRef(null);
+	const [initLoad, setInitLoad] = useState(false);
+	const { ref, inView } = useInView({rootMargin: "0px 1000px 0px 0px"});
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -47,9 +49,8 @@ export default function App() {
 
 	return (
 		<>
-			<Header imgStyle={imgStyle ? changeImageStyle : null} imgButton={imgButton}/>
-			<PokemonList pokemon={pokemon} imgStyle={imgStyle} />
-			<div ref={ref} className="hide">{inView ? 1 : 0}</div>
+			<Header imgStyle={imgStyle ? changeImageStyle : null} imgButton={imgButton} logo={logo}/>
+			<PokemonList pokemon={pokemon} imgStyle={imgStyle} listRef={ref}/>
 		</>
 	);
 }
