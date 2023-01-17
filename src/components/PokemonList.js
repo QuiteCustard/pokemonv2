@@ -17,8 +17,11 @@ export default function PokemonList({pokemon, imgStyle}) {
     <div className="list">
 		{individualPokemonData.map(data => { 
 			return <div key={data.id} className="pokemon">
-				<img src={imgStyle === "default" ? data.sprites.front_default : imgStyle === "alt" && data.sprites.other.dream_world.front_default ? data.sprites.other.dream_world.front_default : data.sprites.front_default} alt={data.name + " sprite"} height="100" width="100"/>
-				<h3>{data.name}<span>{data.id}</span></h3>
+				<div className="image-name">
+					<img src={imgStyle === "default" ? data.sprites.front_default : imgStyle === "alt" && data.sprites.other.dream_world.front_default ? data.sprites.other.dream_world.front_default : data.sprites.front_default} alt={data.name + " sprite"}/>
+					<h3>{data.name}</h3>
+				</div>
+				<p>{data.id}</p>
 			</div> 
 		})}
     </div>

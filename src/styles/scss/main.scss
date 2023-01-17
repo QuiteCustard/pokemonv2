@@ -33,8 +33,8 @@
 }
 
 [data-theme="alt"] {
-    --pokemon-height: 70px;
-    --pokemon-width: 52px;
+    --pokemon-height: 80px;
+    --pokemon-width: 80px;
     --text-direction: vertical-lr;
     --background: url(../../assets/images/material-wood.svg);
     --pokemon-backing: #C5C7AF;
@@ -59,57 +59,60 @@ h3 {
     font-size: clamp(23px, 4vw, 29px);
 }
 
-.hide {
-   margin-top: 10vh;
-}
-
 .list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minMax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minMax(calc(320px - 2rem), 1fr));
     background: var(--background);
     gap: 1rem;
     padding: 1rem;
 }
 
 .pokemon {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
+    display: grid;
+    grid-template-rows: 10px 1fr 66px 10px;
     background-color: var(--pokemon-backing);
-    min-height: 50vh;
+    min-height: 40vh;
     position: relative;
     box-shadow: 4px 3px 2px 2px black;
     border-radius: 1px;
+    padding: 10px 0;
+    gap: 10px;
 
     &::before, &::after {
         content: '';
-        position: absolute;
+        position: relative;
         background-color: #D0F447;
         height: 10px;
         width: 100%;
+        top: 0;
+        left: 0;
     }
 
-    &::before {
-        top: 10px;
-    }
-
-    &::after {
-        bottom: 10px;
-    }
-
-    h3 {
-        writing-mode: var(--text-direction);
-        text-transform: capitalize;
+    .image-name {
         display: flex;
-        gap: 4rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        img {
+            height: var(--pokemon-height);
+            width: var(--pokemon-width);
+            object-fit: contain;
+            object-position: center;
+        }
+
+        h3 {
+            writing-mode: var(--text-direction);
+            text-transform: capitalize;
+        }
+    
+    }
+    
+    p {
+        font-size: 23px;
+        text-align: center;
     }
 
-    img {
-        height: var(--pokemon-height);
-        width: var(--pokemon-width);
-    }
 }
 
 header {

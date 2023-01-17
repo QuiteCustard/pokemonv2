@@ -7,7 +7,7 @@ import './styles/css/main.css';
 export default function App() {
 	const [url, setURL] = useState("https://pokeapi.co/api/v2/pokemon?limit=21");
 	const [nextUrl, setNextURL] = useState("");
-	const { ref, inView } = useInView({threshold: 0});
+	const { ref, inView } = useInView({rootMargin: "1000px"});
 	const [pokemon, setPokemon] = useState([]);
 	const [initLoad, setInitLoad] = useState(false);
 	const [imgStyle, setImgStyle] = useState(localStorage.getItem("image-style") ? localStorage.getItem("image-style") : "default");
