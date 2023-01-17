@@ -4,8 +4,6 @@
 }
 
 :root {
-    --main: #ff1b1c;
-    --secondary: white;
     --normal: #a4acaf;
     --grass: #9bcc50;
     --fire: #fd7d24;
@@ -29,15 +27,19 @@
     --text-direction: unset;
     --background: linear-gradient(90deg, red, black);
     --pokemon-backing: white;
+    --header: red;
+    --header-text: black;
+    
 }
 
 [data-theme="alt"] {
-    --main: green;
     --pokemon-height: 70px;
     --pokemon-width: 52px;
     --text-direction: vertical-lr;
     --background: url(../../assets/images/material-wood.svg);
     --pokemon-backing: #C5C7AF;
+    --header: #1D273B;
+    --header-text: white;
 }
 
 html {
@@ -113,6 +115,10 @@ h3 {
 header {
     position: sticky;
     top: 0;
-    background-color: var(--main);
+    background-color: var(--header);
     z-index: 1;
+
+    h1 {
+        color: var(--header-text);
+    }
 }
