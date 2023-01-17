@@ -37,6 +37,7 @@ export default function App() {
 	useEffect(() => {
 		localStorage.setItem('image-style', imgStyle);
 		imgButton.current.textContent = `Current style: ${imgStyle}`;
+		document.body.dataset.theme = imgStyle;
 	}, [imgStyle])
 
 	function changeImageStyle() {
