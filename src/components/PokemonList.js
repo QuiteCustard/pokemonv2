@@ -4,8 +4,9 @@ import { useHorizontalScroll } from "../sideScroller";
 
 export default function PokemonList({pokemon, imgStyle, listRef, inView}) {
 	const [individualPokemonData, setIndividualPokemonData] = useState([]);
-	const listScroller = useHorizontalScroll();
-
+	const [horizontalScroll, setHorizontal] = useState(false);
+	let listScroller = useHorizontalScroll(horizontalScroll);
+	
 	useEffect(() => {
 		const urls = pokemon.map(mon => mon.url);
 		async function getData() {
@@ -15,6 +16,12 @@ export default function PokemonList({pokemon, imgStyle, listRef, inView}) {
 
 		getData();
 	}, [pokemon])
+
+	useEffect(() => {
+		if (imgStyle === "alt") setHorizontal(true);
+		else setHorizontal(false);
+	}, [horizontalScroll, imgStyle])
+
   return (
     <div className="list" ref={listScroller}>
 		{individualPokemonData.map(data => { 
