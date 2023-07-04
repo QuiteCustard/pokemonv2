@@ -1,0 +1,7 @@
+h1, h2, h3, h4, h5, h6, p, input, button {
+    font-family: 'pokemon', sans-serif;
+}
+
+h3 {
+    font-size: clamp(30px, 4vw, 45px);
+}

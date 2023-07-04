@@ -1,0 +1,119 @@
+.button {
+    border-radius: 25px;
+    border: 0;
+    background-color: var(--button);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background-color 300ms;
+
+    &:hover,
+    &:focus {
+        background-color: var(--button-hover);
+    }
+}
+
+.pokemon-list {
+    display: flex;
+    flex-direction: var(--list-direction);
+    background: var(--list-background);
+    padding: 1rem;
+    height: 100%;
+    overflow: hidden;
+    max-width: 100%;
+
+    swiper-container {
+        width: 100%;
+    }
+}
+
+.pokemon {
+    display: flex;
+    min-height: var(--pokemon-height);
+    position: relative;
+    box-shadow: var(--pokemon-outer-box-shadow);
+    border-radius: 1px;
+    padding: 10px 0;
+    gap: var(--pokemon-gap);
+    min-width: calc(290px - 2rem);
+    
+    .img-wrapper,
+    .pokemon-name,
+    .pokemon-id {
+        justify-self: center;
+    }
+    
+    .img-wrapper {
+        max-height: var(--pokemon-img-height);
+        max-width: var(--pokemon-img-width);
+        border: var(--pokemon-outer-border);
+        border-radius: 25px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .pokemon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        background-color: var(--pokemon-background);
+        box-shadow: var(--pokemon-inner-box-shadow);
+        padding: var(--pokemon-padding);
+        border: var(--pokemon-inner-border);
+        border-radius: 17px;
+    }
+    
+    .pokemon-name {
+        padding-top: 10px;
+        writing-mode: var(--text-direction);
+        text-transform: var(--pokemon-name-style);
+    }
+    
+    .pokemon-id {
+        font-size: 23px;
+        text-align: center;
+    }
+}
+
+[data-theme="gen9"] .pokemon {
+    background-color: var(--pokemon-background);
+    display: grid;
+    grid-template-rows: 15px 80px 1fr 66px 15px;
+    
+    &::before,
+    &::after {
+        content: '';
+        position: relative;
+        background-color: #D0F447;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+#loading-cover {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: 1;
+    color: white;
+    border: unset;
+    display: grid;
+    place-items: center;
+    transition: 1s opacity, 1s visibility;
+    font-size: clamp(40px, 4vh, 120px);
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+    }
+}
