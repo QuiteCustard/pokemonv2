@@ -41,10 +41,9 @@
     --list-direction: column;
     
     // Individual Pokemon styles
-    --pokemon-img-height: 400px;
-    --pokemon-img-width: 400px;
     --pokemon-background: white;
-    --pokemon-height: 90vh;
+    --pokemon-slide-height: 100%;
+    --pokemon-height: 0;
     --pokemon-outer-box-shadow: 0;
     --pokemon-inner-box-shadow: inset 0 0 4px 8px #9fb1d7;
     --pokemon-outer-border: 5px #74a1ff solid;
@@ -76,10 +75,9 @@
     --list-direction: row;
     
     // Individual Pokemon styles
-    --pokemon-img-height: 80px;
-    --pokemon-img-width: 80px;
     --pokemon-background: #C5C7AF;
-    --pokemon-height: 40vh;
+    --pokemon-slide-height: 40vh;
+    --pokemon-height: 100%;
     --pokemon-outer-box-shadow: 4px 3px 2px 2px black;
     --pokemon-inner-box-shadow: 0;
     --pokemon-outer-border: 0;
@@ -107,6 +105,8 @@ html {
 
 #root {
     min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column;
+    
+    
 }
