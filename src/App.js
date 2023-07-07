@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 import logo from "./assets/images/logo.png";
 import Loading from "./components/Loading";
 import { register } from 'swiper/element/bundle';
-import { FreeMode, Mousewheel, Keyboard } from 'swiper/modules';
+import { FreeMode, Mousewheel, Keyboard, Navigation } from 'swiper/modules';
 register();
 
 export default function App() {
@@ -81,7 +81,7 @@ export default function App() {
 							slidesPerView: 4
 						},
 						1024: {
-						  slidesPerView: 6,
+						  slidesPerView: 8,
 						},
 					  },
 					on: {
@@ -97,7 +97,17 @@ export default function App() {
 					keyboard: true,
 					freemode: true,
 					spaceBetween: 0,
-					slidesPerView: 1,
+					breakpoints: {
+						320: {
+							slidesPerView: 1
+						},
+						640: {
+							slidesPerView: 2
+						},
+						1024: {
+						  slidesPerView: 6,
+						},
+					  },
 					on: {
 						init() {
 						},
@@ -127,7 +137,7 @@ export default function App() {
 	return (
 		<>
 			<Header pokedexStyle={pokedexStyle ? changePokedexStyle : null} pokedexButton={pokedexButton} logo={logo}/>
-			<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} loading={loading} swiper={swiper}/>
+			<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} swiper={swiper}/>
 			<Loading loading={loading} />
 		</>
 	);

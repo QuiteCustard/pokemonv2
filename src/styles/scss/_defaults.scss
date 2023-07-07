@@ -4,17 +4,6 @@
 }
 
 :root {
-    // Header styles
-    --header-main: #e3dc9b;
-    --header-secondary: #E86B67;
-    --header-tertiary:black;
-    --header-text: black;
-    --header-grid-areas: ". logo title button";
-    --header-grid-columns: 50px 100px auto 1fr;
-    --header-border-radius: 10px;
-    --header-padding: 1rem;
-    --logo-background: var(--header-secondary);
-
     // Pokemon types
     --normal: #a4acaf;
     --grass: #9bcc50;
@@ -35,49 +24,25 @@
     --ghost: #7b62a3;
     --steel: #9eb7b8;
 
-    // Pokemon list styles
-    --text-direction: unset;
-    --list-background: #89A0A8;
-    --list-direction: column;
-    
-    // Individual Pokemon styles
-    --pokemon-background: white;
-    --pokemon-slide-height: 100%;
-    --pokemon-height: 0;
-    --pokemon-outer-box-shadow: 0;
-    --pokemon-inner-box-shadow: inset 0 0 4px 8px #9fb1d7;
-    --pokemon-outer-border: 5px #74a1ff solid;
-    --pokemon-inner-border: 5px solid var(--header-main);
-    --pokemon-name-style: uppercase;
-    --pokemon-padding: 1rem;
-    --pokemon-gap: 0;
-    
-    // Defaults
-    --button: rgb(58, 58, 58);
-    --button-hover: #000000;
-}
-
-[data-theme="gen9"] {
     // Header styles
     --header-main: repeating-linear-gradient(180deg, #ffffff 0%, #fafafa 13%);
     --header-secondary: #1D273B;
-    --header-tertiary:#d7b308;
+    --header-tertiary: #d7b308;
     --header-text: white;
-    --header-grid-areas:  "logo . button" "title title title";
+    --header-grid-areas: "logo . button""title title title";
     --header-grid-columns: 200px auto 1fr;
     --header-border-radius: 0;
     --header-padding: 1rem 0 0;
     --logo-background: 0;
 
     // Pokemon list styles
-    --text-direction: vertical-lr;
     --list-background: url(../../assets/images/material-wood.svg);
     --list-direction: row;
     
     // Individual Pokemon styles
+    --text-direction: vertical-lr;
     --pokemon-background: #C5C7AF;
     --pokemon-slide-height: 40vh;
-    --pokemon-height: 100%;
     --pokemon-outer-box-shadow: 4px 3px 2px 2px black;
     --pokemon-inner-box-shadow: 0;
     --pokemon-outer-border: 0;
@@ -85,10 +50,59 @@
     --pokemon-name-style: capitalize;
     --pokemon-padding: 0;
     --pokemon-gap: 10px 0;
+    --pokemon-height: 80px;
+    --pokemon-width: 80px;
+    --pokemon-scale: 1;
+    --pokemon-name-id-direction: column;
+    --pokemon-name-id-background: none;
+    --pokemon-name-id-border-radius-left: 0;
+    --pokemon-name-id-border-radius-right: 0;
+    --pokemon-name-id-box-shadow: 0;
 
     //Defaults
     --button: #DD8040;
     --button-hover: #b46835;
+}
+
+[data-theme="gen4"] {
+    // Header styles
+    --header-main: #e3dc9b;
+    --header-secondary: #E86B67;
+    --header-tertiary: black;
+    --header-text: black;
+    --header-grid-areas: ". logo title button";
+    --header-grid-columns: 50px 100px auto 1fr;
+    --header-border-radius: 10px;
+    --header-padding: 1rem;
+    --logo-background: var(--header-secondary);
+
+    // Pokemon list styles
+    --list-background: #89A0A8;
+    --list-direction: column;
+    
+    // Individual Pokemon styles
+    --text-direction: initial;
+    --pokemon-background: white;
+    --pokemon-slide-height: 100%;
+    --pokemon-outer-box-shadow: 0;
+    --pokemon-inner-box-shadow: inset 0 0 4px 8px #9fb1d7;
+    --pokemon-outer-border: 5px #74a1ff solid;
+    --pokemon-inner-border: 5px solid var(--header-main);
+    --pokemon-name-style: uppercase;
+    --pokemon-padding: 1rem;
+    --pokemon-gap: 3.2rem;
+    --pokemon-height: 439px;
+    --pokemon-width: 452px;
+    --pokemon-scale: 0.7;
+    --pokemon-name-id-direction: row-reverse;
+    --pokemon-name-id-background: #D1D3E2;
+    --pokemon-name-id-border-radius-left: 100px;
+    --pokemon-name-id-border-radius-right: 15px;
+    --pokemon-name-id-box-shadow:  0px 4px 3px #00000036;
+
+    // Defaults
+    --button: rgb(58, 58, 58);
+    --button-hover: #000000;
 }
 
 html {
@@ -107,6 +121,4 @@ html {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    
-    
 }
