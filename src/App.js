@@ -20,6 +20,7 @@ export default function App() {
 	const { ref, inView } = useInView({rootMargin: "0px 1000px 0px 0px"});
 	const [loading, setLoading] = useState(true);
 	const swiper = useRef(null);
+	const [initSwiper, setInitSwiper] = useState(false);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -30,16 +31,16 @@ export default function App() {
 			const data = await fetch(url, { signal })
 			const { next, results } = await data.json();
 
-			setNextURL(next);
-			setPokemon(p => [...p, ...results]);
-			setInitLoad(true);
-
-			if (results) setLoading(false);
+			if (results) { 
+				setNextURL(next);
+				setPokemon(p => [...p, ...results]);
+				setInitLoad(true);
+				setInitSwiper(true);
+				setLoading(false);
+			};
 		}
 		
 		getPokemonBatch();
-		
-		initSwiper();
 		return () => controller.abort();
 	}, [url])
 	
@@ -52,8 +53,6 @@ export default function App() {
 		pokedexButton.current.textContent = `Current Gen: ${pokedexStyle.substring(3)}`;
 		document.body.dataset.theme = pokedexStyle;
 
-		initSwiper();
-
 		setTimeout(function() {
 			setLoading(false);
 		}, 700)
@@ -61,59 +60,69 @@ export default function App() {
 	
 	function changePokedexStyle() {
 		setLoading(true);
-
 		setTimeout(function() {
 			if (pokedexStyle === "gen9") setpokedexStyle("gen4");
 			else setpokedexStyle("gen9");
+			setInitSwiper(true);
 		}, 1500)
 	}
 
-	function getSwiperParams() {
-		if (pokedexStyle === "gen9") {
-			return {
-				direction: "horizontal",
-				mousewheel: true,
-				keyboard: true,
-				freemode: true,
-				spaceBetween: 20,
-				slidesPerView: 1,
-				breakpoints: {
-					640: {
-						slidesPerView: 4,
+	useEffect(() => {
+		function getSwiperParams() {
+			if (pokedexStyle === "gen9") {
+				return {
+					direction: "horizontal",
+					mousewheel: true,
+					keyboard: true,
+					freemode: true,
+					spaceBetween: 20,
+					breakpoints: {
+						640: {
+							slidesPerView: 4
+						},
+						1024: {
+						  slidesPerView: 6,
+						},
+					  },
+					on: {
+						init() {
+						},
 					},
-					1024: {
-						slidesPerView: 6,
+				}
+			}
+			else {
+				return {
+					direction: "vertical",
+					mousewheel: true,
+					keyboard: true,
+					freemode: true,
+					spaceBetween: 0,
+					slidesPerView: 1,
+					on: {
+						init() {
+						},
 					},
-				},
-				on: {
-					init() {
-					},
-				},
-			};
+				}
+			}
 		}
-		else {
-			return {
-				direction: "vertical",
-				mousewheel: true,
-				keyboard: true,
-				freemode: true,
-				spaceBetween: 0,
-				slidesPerView: 1,
-				on: {
-					init() {
-					
-					},
-				},
-			};
+
+		if (initSwiper === true) {
+			const swiperParams = getSwiperParams();
+	
+			Object.assign(swiper.current, swiperParams);
+			swiper.current.initialize();
 		}
-	}
-
-	function initSwiper() {
-		const swiperParams = getSwiperParams();
-
-		Object.assign(swiper.current, swiperParams);
-		swiper.current.initialize();
-	}
+		
+		setInitSwiper(false);
+	}, [initSwiper, pokedexStyle])
+	
+	useEffect(() => {
+		swiper.current.addEventListener('slidechange', (e) => {
+			swiper.current.querySelectorAll("swiper-slide").forEach(slide => {
+				if (slide.role === null) setInitSwiper(true);
+			})
+		  });
+	}, [])
 
 	return (
 		<>
