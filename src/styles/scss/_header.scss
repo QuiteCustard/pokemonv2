@@ -6,7 +6,7 @@ header {
     top: 0;
     z-index: 99;
     background: var(--header-main);
-    box-shadow: 2px 4px 5px 1px black;
+    box-shadow: 0 4px 5px 2px black;
     padding: 1rem;
     gap: 10px;
     
@@ -61,5 +61,20 @@ header {
         grid-template-areas: var(--header-grid-areas);
         padding: var(--header-padding) 0;
         gap: 0;
+    }
+}
+
+.button {
+    border-radius: 25px;
+    border: 0;
+    background-color: var(--button);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background-color 300ms;
+
+    &:hover,
+    &:focus {
+        background-color: var(--button-hover);
     }
 }
