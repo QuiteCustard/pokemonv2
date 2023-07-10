@@ -32,6 +32,7 @@
   --logo-background: 0;
   --list-background: url(../../assets/images/material-wood.svg);
   --list-direction: row;
+  --scroll-direction: x;
   --text-direction: vertical-lr;
   --pokemon-background: #C5C7AF;
   --pokemon-slide-height: 40vh;
@@ -66,6 +67,7 @@
   --logo-background: var(--header-secondary);
   --list-background: #89A0A8;
   --list-direction: column;
+  --scroll-direction: y;
   --text-direction: initial;
   --pokemon-background: white;
   --pokemon-slide-height: 100%;
@@ -99,7 +101,6 @@
 header {
   position: sticky;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   top: 0;
   z-index: 99;
@@ -109,21 +110,23 @@ header {
   gap: 10px;
 }
 header img {
-  grid-area: logo;
   background-color: var(--logo-background);
   border-radius: var(--header-border-radius);
-  flex: 100px 0;
+  width: 50px;
+  height: 50px;
 }
 @media (min-width: 559px) {
   header img {
+    grid-area: logo;
     border-top-left-radius: var(--header-border-radius);
     border-bottom-left-radius: var(--header-border-radius);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    width: 100px;
+    height: 100px;
   }
 }
 header h1 {
-  grid-area: title;
   text-align: center;
   color: black;
   width: 100%;
@@ -135,6 +138,7 @@ header h1 {
 }
 @media (min-width: 559px) {
   header h1 {
+    grid-area: title;
     padding: 1rem;
     color: var(--header-text);
     background-color: var(--header-secondary);
@@ -143,7 +147,6 @@ header h1 {
 header .button {
   grid-area: button;
   justify-self: end;
-  flex: 100%;
 }
 @media (min-width: 559px) {
   header .button {
@@ -184,30 +187,103 @@ h3 {
   line-height: 1.1;
 }
 
-.pokemon-list {
-  height: 100%;
-  padding: 1rem;
-  background-color: var(--list-background);
+.main {
+  display: flex;
+  background: var(--list-background);
+}
+.main > * {
+  flex: 50%;
 }
 
-swiper-container {
-  --height: 200px;
-  height: calc(100vh - var(--height) - 2rem);
+.pokemon-list {
+  display: flex;
+  flex-direction: var(--list-direction);
+  gap: 1rem;
+  --height: 92px;
+  max-height: calc(100vh - var(--height));
+  height: 100%;
+  padding: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: var(--scroll-direction) mandatory;
+  position: relative;
+  align-items: flex-end;
 }
 @media (min-width: 559px) {
-  swiper-container {
-    --height: 208px;
+  .pokemon-list {
+    --height: 132px;
   }
+}
+
+.pokemon {
+  scroll-snap-align: center;
+  align-items: center;
+  border-radius: 1px;
+  box-shadow: 4px 3px 2px 2px #000;
+  box-shadow: var(--pokemon-outer-box-shadow);
+  display: grid;
+  gap: var(--pokemon-gap);
+  width: 100%;
+}
+.pokemon:first-of-type {
+  margin-top: 50%;
+}
+.pokemon .pokemon-img {
+  object-fit: contain;
+  object-position: center;
+  height: 100%;
+  width: 100%;
+  max-height: var(--pokemon-height);
+  max-width: var(--pokemon-width);
+  justify-self: center;
+  transition: 300ms opacity;
+}
+@media (min-width: 1024px) {
+  .pokemon .pokemon-img {
+    height: var(--pokemon-height);
+    width: var(--pokemon-width);
+  }
+}
+.pokemon .name-id {
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--pokemon-name-id-background);
+  transition: 400ms left;
+  border-radius: var(--pokemon-name-id-border-radius-right);
+  box-shadow: var(--pokemon-name-id-box-shadow);
+  padding: 2rem;
+}
+.pokemon .name-id .pokemon-name {
+  writing-mode: var(--text-direction);
+}
+@media (min-width: 1024px) {
+  .pokemon .name-id {
+    flex-direction: var(--pokemon-name-id-direction);
+    border-top-left-radius: var(--pokemon-name-id-border-radius-left);
+    border-bottom-left-radius: var(--pokemon-name-id-border-radius-left);
+    border-top-right-radius: var(--pokemon-name-id-border-radius-right);
+    border-bottom-right-radius: var(--pokemon-name-id-border-radius-right);
+  }
+}
+[data-theme=gen9] .pokemon {
+  background-color: var(--pokemon-background);
+}
+
+[data-theme=gen4] .pokemon .pokemon-img {
+  display: none;
 }
 
 #loading-cover {
   display: none;
 }
 
-.pokemon-img {
-  display: none;
-  height: 100%;
+.observer {
+  position: fixed;
   width: 100%;
+  height: 132px;
 }
 
 /*# sourceMappingURL=main.css.map */

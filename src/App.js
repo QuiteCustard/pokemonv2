@@ -2,13 +2,12 @@ import { useEffect, useRef, useState } from "react";
 
 import Header from "./components/Header";
 import PokemonList from "./components/PokemonList";
+import ImageHolder from "./components/ImageHolder";
 import './styles/css/main.css';
 import { useInView } from "react-intersection-observer";
 import logo from "./assets/images/logo.png";
 import Loading from "./components/Loading";
-import { register } from 'swiper/element/bundle';
-import { FreeMode, Mousewheel, Keyboard } from 'swiper/modules';
-register();
+import { useHorizontalScroll } from "./sideScroller";
 
 export default function App() {
 	const [url, setURL] = useState("https://pokeapi.co/api/v2/pokemon?limit=21");
@@ -19,8 +18,9 @@ export default function App() {
 	const [initLoad, setInitLoad] = useState(false);
 	const { ref, inView } = useInView({rootMargin: "0px 1000px 0px 0px"});
 	const [loading, setLoading] = useState(true);
-	const swiper = useRef(null);
-	const [initSwiper, setInitSwiper] = useState(false);
+	const [horizontalScroll, setHorizontal] = useState(true);
+	const listScroller = useHorizontalScroll(horizontalScroll);
+	const pokemonObserver = useRef();
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -35,7 +35,6 @@ export default function App() {
 				setNextURL(next);
 				setPokemon(p => [...p, ...results]);
 				setInitLoad(true);
-				setInitSwiper(true);
 				setLoading(false);
 			};
 		}
@@ -45,14 +44,15 @@ export default function App() {
 	}, [url])
 	
 	useEffect(() => {
-		if (inView && initLoad) setURL(nextUrl);
-	}, [nextUrl, inView, initLoad])
+		if (inView === true && nextUrl !== "") setURL(nextUrl);
+	}, [inView])
 	
 	useEffect(() => {
-		setInitSwiper(true);
 		localStorage.setItem('pokedex-style', pokedexStyle);
-		pokedexButton.current.textContent = `Current Gen: ${pokedexStyle.substring(3)}`;
+		pokedexButton.current.textContent = `Gen: ${pokedexStyle.substring(3)}`;
 		document.body.dataset.theme = pokedexStyle;
+
+		pokedexStyle === "gen9" ? setHorizontal(true) : setHorizontal(false);
 
 		setTimeout(function() {
 			setLoading(false);
@@ -62,75 +62,18 @@ export default function App() {
 	function changePokedexStyle() {
 		setLoading(true);
 		setTimeout(function() {
-			if (pokedexStyle === "gen9") setpokedexStyle("gen4");
-			else setpokedexStyle("gen9");
+			pokedexStyle === "gen9" ? setpokedexStyle("gen4") : setpokedexStyle("gen9");
 		}, 1500)
 	}
-
-	useEffect(() => {
-		function getSwiperParams() {
-			console.log(pokedexStyle)
-			if (pokedexStyle === "gen9") {
-				return {
-					direction: "horizontal",
-					mousewheel: true,
-					keyboard: true,
-					freemode: true,
-					spaceBetween: 20,
-					on: {
-						init() {
-						},
-					},
-				}
-			}
-			else {
-				return {
-					direction: "vertical",
-					mousewheel: true,
-					keyboard: true,
-					freemode: true,
-					spaceBetween: 0,
-					on: {
-						init() {
-						},
-					},
-				}
-			}
-		}
-		
-		if (initSwiper === true) {
-			const swiperParams = getSwiperParams();
-			swiperParams.breakpoints = {
-				320: {
-					slidesPerView: 1,
-				}, 
-				640: {
-					slidesPerView: 4,
-				},
-				1024: {
-					slidesPerView: 6,
-				},
-			  }
-			
-			Object.assign(swiper.current, swiperParams);
-			swiper.current.initialize();
-		}
-		
-		setInitSwiper(false);
-	}, [initSwiper])
-	
-	useEffect(() => {
-		swiper.current.addEventListener('slidechange', (e) => {
-			swiper.current.querySelectorAll("swiper-slide").forEach(slide => {
-				if (slide.role === null) setInitSwiper(true);
-			})
-		  });
-	}, [])
 
 	return (
 		<>
 			<Header pokedexStyle={pokedexStyle ? changePokedexStyle : null} pokedexButton={pokedexButton} logo={logo}/>
-			<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} swiper={swiper}/>
+			<div className="main">
+				<div className="observer" ref={pokemonObserver}></div>
+				<ImageHolder />
+				<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} listScroller={listScroller} pokemonObserver={pokemonObserver}/>
+			</div>
 			<Loading loading={loading} />
 		</>
 	);

@@ -1,7 +1,6 @@
 header {
     position: sticky;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     top: 0;
     z-index: 99;
@@ -11,21 +10,23 @@ header {
     gap: 10px;
     
     img {
-        grid-area: logo;
         background-color: var(--logo-background);
         border-radius: var(--header-border-radius);
-        flex: 100px 0;
+        width: 50px;
+        height: 50px;
         
         @media (min-width: 559px) {
+            grid-area: logo;
             border-top-left-radius: var(--header-border-radius);
             border-bottom-left-radius: var(--header-border-radius);
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            width: 100px;
+            height: 100px;
         }
     }
     
     h1 {
-        grid-area: title;
         text-align: center;
         color: black;
         width: 100%;
@@ -36,6 +37,7 @@ header {
         flex: 1;
         
         @media (min-width: 559px) {
+            grid-area: title;
             padding: 1rem;
             color: var(--header-text);
             background-color: var(--header-secondary);
@@ -45,8 +47,6 @@ header {
     .button {
         grid-area: button;
         justify-self: end;
-        
-        flex: 100%;
 
         @media (min-width: 559px) {
             margin: 0 1rem;
