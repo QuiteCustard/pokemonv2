@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { getIndividualPokemon } from "../PokemonGetter";
 import Pokemon from "./Pokemon";
 
-export default function PokemonList({pokemon, pokedexStyle, listRef, listScroller, pokemonObserver}) {
+export default function PokemonList({pokemon, pokedexStyle, listRef, listScroller, pokemonObserver, imgHolder}) {
 	const [individualPokemonData, setIndividualPokemonData] = useState([]);
 	const [monList, setMonList] = useState(false);
 
@@ -16,21 +16,23 @@ export default function PokemonList({pokemon, pokedexStyle, listRef, listScrolle
 
 		getData();
 
-		function checkOverlap(mon) {
+		function checkOverlap(mon, monCords) {
 			const observerCords = pokemonObserver.current.getBoundingClientRect();
-			const monCords = mon.getBoundingClientRect();
-	
-			if ((observerCords.top + observerCords.height) < monCords.top || observerCords.top > (monCords.top + monCords.height) || (observerCords.left + observerCords.width) < monCords.left || observerCords.left > (monCords.left + monCords.width)) pokemonObserver.current.dataset.tester = mon.querySelector("img").src;
+
+			if (document.querySelector(".pokemon.active")) document.querySelector(".pokemon.active").classList.remove("active");
+
+			if ((monCords.top + 16) > observerCords.top && monCords.bottom < observerCords.bottom) {
+				imgHolder.current.src = mon.querySelector("img").src;
+				mon.classList.add("active");
+			}
 		}
 
-		if (monList === true) {
-			listScroller.current.addEventListener("scroll", () => {
-				listScroller.current.querySelectorAll(".pokemon").forEach(mon => checkOverlap(mon));
-			})
-		}
+		if (monList === true) listScroller.current.addEventListener("scroll", () => listScroller.current.querySelectorAll(".pokemon").forEach(mon => {
+			const monCords = mon.getBoundingClientRect();
+			if (monCords.top < 150) checkOverlap(mon, monCords);	
+		}));
 	}, [pokemon])
 	
-
     useEffect(() => {
 		if (listScroller.current !== null) setMonList(true);
     }, [listScroller])

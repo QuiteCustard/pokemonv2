@@ -63,6 +63,19 @@
     //Defaults
     --button: #DD8040;
     --button-hover: #b46835;
+    --header-height: 116px;
+
+    @media (min-width: 345px) {
+        --header-height: 92px;
+    }
+
+    @media (min-width: 559px) {
+        --header-height: 132px;
+    }
+
+    @media (min-width: 1200px) {
+        --header-height: 148px;
+    }
 }
 
 [data-theme="gen4"] {
@@ -93,7 +106,7 @@
     --pokemon-name-style: uppercase;
     --pokemon-padding: 1rem;
     --pokemon-gap: 3.2rem;
-    --pokemon-height: 439px;
+    --pokemon-height: 305px;
     --pokemon-width: 452px;
     --pokemon-scale: 0.7;
     --pokemon-name-id-direction: row-reverse;
@@ -116,4 +129,5 @@
 }
 
 body {
+    overflow: hidden;
 }

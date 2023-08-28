@@ -21,6 +21,7 @@ export default function App() {
 	const [horizontalScroll, setHorizontal] = useState(true);
 	const listScroller = useHorizontalScroll(horizontalScroll);
 	const pokemonObserver = useRef();
+	const imgHolder = useRef();
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -71,8 +72,8 @@ export default function App() {
 			<Header pokedexStyle={pokedexStyle ? changePokedexStyle : null} pokedexButton={pokedexButton} logo={logo}/>
 			<div className="main">
 				<div className="observer" ref={pokemonObserver}></div>
-				<ImageHolder />
-				<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} listScroller={listScroller} pokemonObserver={pokemonObserver}/>
+				<ImageHolder imgHolder={imgHolder} />
+				<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} listScroller={listScroller} pokemonObserver={pokemonObserver} imgHolder={imgHolder} />
 			</div>
 			<Loading loading={loading} />
 		</>
