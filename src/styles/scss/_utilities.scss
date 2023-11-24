@@ -65,6 +65,8 @@
         transition: 400ms left;
         border-radius: var(--pokemon-name-id-border-radius-right);
         box-shadow: var(--pokemon-name-id-box-shadow);
+        align-self: flex-end;
+        margin-bottom: 5px;
         
         @media (min-width: 1024px) {
             flex-direction: var(--pokemon-name-id-direction);
@@ -72,7 +74,8 @@
             border-bottom-left-radius: var(--pokemon-name-id-border-radius-left);
             border-top-right-radius: var(--pokemon-name-id-border-radius-right);
             border-bottom-right-radius: var(--pokemon-name-id-border-radius-right);
-
+            align-self: unset;
+            margin-bottom: 0;
         }
     }
     

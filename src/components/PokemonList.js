@@ -17,7 +17,7 @@ export default function PokemonList({pokemon, pokedexStyle, listRef, swiper}) {
 
   return (
 	<div className="pokemon-list">
-		<swiper-container init="false" ref={swiper}>
+		<swiper-container init="false" ref={swiper} mousewheel={true} keyboard={true} freemode={true}>
 			{individualPokemonData.map(data => { 
 				return <swiper-slide key={data.id}>
 					<div className="pokemon">
