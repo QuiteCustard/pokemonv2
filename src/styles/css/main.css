@@ -312,6 +312,10 @@ h3 {
   top: 0;
   left: 0;
 }
+[data-theme=gen9] .pokemon .name-id {
+  align-self: unset;
+  margin-bottom: 0;
+}
 [data-theme=gen9] .pokemon .name-id .pokemon-name {
   flex: 1;
 }
