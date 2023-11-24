@@ -21,11 +21,11 @@ export default function PokemonList({pokemon, pokedexStyle, listRef, swiper}) {
 			{individualPokemonData.map(data => { 
 				return <swiper-slide key={data.id}>
 					<div className="pokemon">
-						<img className="pokemon-img" src={data.sprites.other.dream_world.front_default ? data.sprites.other.dream_world.front_default : data.sprites.front_default} alt={data.name + " sprite"} width={pokedexStyle === "gen4" ? "452" : "80"} height={pokedexStyle === "gen4" ? "439" : "80"}/>
-						<div className="name-id">
+						<img className="pokemon-img" src={data.sprites.other.dream_world.front_default ? data.sprites.other.dream_world.front_default : data.sprites.front_default} alt={data.name + " sprite"} width={pokedexStyle === "gen4" ? "452" : "80"} height={pokedexStyle === "gen4" ? "439" : "80"} />
+						<a className="name-id" href="/">
 							<h3 className="pokemon-name">{data.name}</h3>
 							<p className="pokemon-id">{pokedexStyle === "gen4" && data.id < 100 ? "0" : ''}{pokedexStyle === "gen4" && data.id < 10 ? "0" + data.id : data.id}</p>
-						</div>
+						</a>
 					</div>
 				</swiper-slide> 
 			})}

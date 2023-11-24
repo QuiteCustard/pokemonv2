@@ -27,7 +27,7 @@ header {
     h1 {
         grid-area: title;
         text-align: center;
-        color: black;
+        color: var(--header-text-mobile);
         width: 100%;
         height: 100%;
         border-top-right-radius: var(--header-border-radius);
@@ -37,7 +37,7 @@ header {
         
         @media (min-width: 559px) {
             padding: 1rem;
-            color: var(--header-text);
+            color: var(--header-text-desktop);
             background-color: var(--header-secondary);
         }
     }

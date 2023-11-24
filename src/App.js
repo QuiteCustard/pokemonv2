@@ -91,22 +91,26 @@ export default function App() {
 					mousewheel: true,
 					keyboard: true,
 					freemode: true,
-					spaceBetween: 20,
 					breakpoints: {
 						320: {
-							slidesPerView: 2
+							slidesPerView: 2,
+							spaceBetween: 20,
 						},
 						559: {
-							slidesPerView: 4
+							slidesPerView: 4,
+							spaceBetween: 20,
 						},
 						1024: {
 							slidesPerView: 6,
+							spaceBetween: 20,
 						},
 						1400: {
 							slidesPerView: 8,
+							spaceBetween: 20,
 						},
 						2000: {
 							slidesPerView: 10,
+							spaceBetween: 20,
 						},
 					},
 					on: {
@@ -120,22 +124,26 @@ export default function App() {
 					mousewheel: true,
 					keyboard: true,
 					freemode: true,
-					spaceBetween: 0,
 					breakpoints: {
 						320: {
-							slidesPerView: 1
+							slidesPerView: 1,
+							spaceBetween: 0,
 						},
 						559: {
-							slidesPerView: 1
+							slidesPerView: 1,
+							spaceBetween: 0,
 						},
 						1024: {
-							slidesPerView: 8,
+							slidesPerView: 5,
+							spaceBetween: 50
 						},
 						1400: {
-							slidesPerView: 8,
+							slidesPerView: 5,
+							spaceBetween: 50
 						},
 						2000: {
-							slidesPerView: 8,
+							slidesPerView: 5,
+							spaceBetween: 50
 						},
 					},
 					on: {
@@ -172,6 +180,7 @@ export default function App() {
 		<>
 			<Header pokedexStyle={pokedexStyle ? changePokedexStyle : null} pokedexButton={pokedexButton} logo={logo} /> 
 			<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} swiper={swiper}/> 
+			<div className="tester"></div>
 			<Loading loading={loading} />
 		</>
 	);
