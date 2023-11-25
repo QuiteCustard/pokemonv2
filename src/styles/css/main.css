@@ -330,7 +330,7 @@ h3 {
 }
 
 [data-theme=gen9] swiper-container {
-  max-height: calc(100dvh - 200px - 2rem);
+  max-height: calc(100dvh - 168px - 2rem);
   width: 100%;
   overflow: hidden;
 }
