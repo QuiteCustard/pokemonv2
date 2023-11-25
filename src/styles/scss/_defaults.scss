@@ -52,8 +52,8 @@
     --pokemon-name-style: capitalize;
     --pokemon-padding: 0;
     --pokemon-gap: 10px 0;
-    --pokemon-height: 80px;
-    --pokemon-width: 80px;
+    --pokemon-width-mobile: 80px;
+    --pokemon-width-desktop: 80px;
     --pokemon-name-id-direction-mobile: column;
     --pokemon-name-id-direction-desktop: column;
     --pokemon-name-id-background: none;
@@ -64,6 +64,7 @@
     //Defaults
     --button: #DD8040;
     --button-hover: #b46835;
+    --button-radius: 25px;
 }
 
 [data-theme="gen4"] {
@@ -94,8 +95,9 @@
     --pokemon-name-style: uppercase;
     --pokemon-padding: 1rem;
     --pokemon-gap: 3.2rem;
-    --pokemon-height: 439px;
-    --pokemon-width: 452px;
+    --pokemon-height: auto;
+    --pokemon-width-mobile: 100dvw;
+    --pokemon-width-desktop: 25dvw;
     --pokemon-name-id-direction-mobile: row;
     --pokemon-name-id-direction-desktop: row-reverse;
     --pokemon-name-id-background: #D1D3E2;
@@ -106,6 +108,7 @@
     // Defaults
     --button: rgb(58, 58, 58);
     --button-hover: #000000;
+    --button-radius: 10px;
 }
 
 html {

@@ -14,13 +14,16 @@ header {
         grid-area: logo;
         background-color: var(--logo-background);
         border-radius: var(--header-border-radius);
-        flex: 100px 0;
+        flex: 75px 0;
         
         @media (min-width: 559px) {
             border-top-left-radius: var(--header-border-radius);
             border-bottom-left-radius: var(--header-border-radius);
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            flex: 100px 0;
+            height: 100px;
+            width: 100px;
         }
     }
     
