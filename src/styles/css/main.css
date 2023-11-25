@@ -204,7 +204,6 @@ h3 {
   flex: 1;
   overflow: hidden;
   max-width: 100%;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
 }
 @media (min-width: 1500px) {
   .pokemon-list {
@@ -292,7 +291,7 @@ h3 {
 }
 
 [data-theme=gen4] swiper-container {
-  height: calc(95vh - 200px);
+  height: calc(95dvh - 200px);
   overflow: hidden;
 }
 [data-theme=gen4] .pokemon .name-id:hover, [data-theme=gen4] .pokemon .name-id:focus {
