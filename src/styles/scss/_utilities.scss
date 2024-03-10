@@ -37,7 +37,6 @@
     gap: 1rem;
     background-color: var(--pokemon-background);
 
-
     .pokemon-img {
         object-fit: contain;
         object-position: center;
@@ -88,11 +87,9 @@
         @media (min-height: 1024px) {
             min-height: 140px;
         }
-        
     }
 
     .pokemon-name {
-        //padding-top: 10px;
         writing-mode: var(--text-direction);
         text-transform: var(--pokemon-name-style);
         pointer-events: none;
@@ -117,6 +114,25 @@
     }
 
     .pokemon {
+        .img-link {
+            transition: visibility 300ms;
+            
+            &:has(~ .name-id:hover, ~ .name-id:focus) .pokemon-img {
+                filter: drop-shadow(4px 8px 17px black);
+            }
+
+            &:hover,
+            &:focus {
+                .pokemon-img {
+                    filter: drop-shadow(4px 8px 17px black);
+                }
+
+                ~.name-id {
+                    background-color: var(--header-secondary);
+                }
+            }
+        }
+
         .name-id {
             &:hover,
             &:focus {
@@ -126,6 +142,8 @@
     }
 
     .pokemon-img {
+        transition: filter 300ms;
+
         @media (min-width: 1024px) {
             position: absolute;
             top: 0;
@@ -144,7 +162,6 @@
                 margin-top: 25vh;
             }
 
-
             &.swiper-slide-active {
                 .name-id {
                     left: -10%;
@@ -153,14 +170,17 @@
             }
 
             &:not(.swiper-slide-active) {
-                .pokemon-img {
-                    opacity: 0;
+                .img-link {
+                    visibility: hidden;
+
+                    .pokemon-img {
+                        opacity: 0;
+                    }
                 }
             }
         }
     }
 }
-
 
 [data-theme="gen9"] {
     swiper-container {
@@ -169,11 +189,15 @@
         overflow: hidden;
     }
 
+    swiper-slide {
+        max-height: 99%;
+    }
+
     .pokemon {
         grid-template-rows: 15px 100px 1fr 15px;
         grid-template-columns: unset;
         align-items: unset;
-
+        max-width: 214px;
 
         &:hover,
         &:focus {

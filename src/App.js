@@ -15,12 +15,7 @@ import Loading from "./components/Loading";
 import {
 	register
 } from 'swiper/element/bundle';
-import {
-	FreeMode,
-	Mousewheel,
-	Keyboard
-} from 'swiper/modules';
-import Swiper from "swiper";
+
 register();
 
 export default function App() {
@@ -31,8 +26,8 @@ export default function App() {
 	const pokedexButton = useRef(null);
 	const {ref, inView} = useInView({rootMargin: "0px 1000px 0px 0px"});
 	const [loading, setLoading] = useState(true);
-	const swiper = useRef(null);
 	const [initSwiper, setInitSwiper] = useState(false);
+	const swiper = useRef(null);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -40,13 +35,9 @@ export default function App() {
 
 		async function getPokemonBatch() {
 			setLoading(true);
-			const data = await fetch(url, {
-				signal
-			})
-			const {
-				next,
-				results
-			} = await data.json();
+			const data = await fetch(url, {signal})
+
+			const {next,results} = await data.json();
 
 			if (results) {
 				setNextURL(next);
@@ -77,12 +68,13 @@ export default function App() {
 
 	function changePokedexStyle() {
 		setLoading(true);
+
 		setTimeout(function () {
 			if (pokedexStyle === "gen9") setpokedexStyle("gen4");
 			else setpokedexStyle("gen9");
 		}, 1500)
 	}
-
+		
 	useEffect(() => {
 		function getSwiperParams() {
 			if (pokedexStyle === "gen9") {
@@ -106,11 +98,11 @@ export default function App() {
 						},
 						1400: {
 							slidesPerView: 8,
-							spaceBetween: 20,
+							spaceBetween: 5,
 						},
 						2000: {
 							slidesPerView: 10,
-							spaceBetween: 20,
+							spaceBetween: 5,
 						},
 					},
 					on: {
@@ -153,7 +145,7 @@ export default function App() {
 				}
 			}
 		}
-
+		
 		if (initSwiper === true) {
 			const swiperParams = getSwiperParams();
 
@@ -165,22 +157,19 @@ export default function App() {
 			swiper.current.swiper.currentBreakpoint = false;
 			swiper.current.swiper.update();
 		}
-		setInitSwiper(false);
+
+		updateSwiper(false);
 	}, [initSwiper])
 
-	useEffect(() => {
-		swiper.current.addEventListener('slidechange', () => {
-			swiper.current.querySelectorAll("swiper-slide").forEach(slide => {
-				if (slide.role === null) setInitSwiper(true);
-			})
-		});
-	}, [])
+	function updateSwiper(val) {
+		setInitSwiper(val);
+	}
 
 	return ( 
 		<>
-			<Header pokedexStyle={pokedexStyle ? changePokedexStyle : null} pokedexButton={pokedexButton} logo={logo} /> 
-			<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} swiper={swiper}/> 
-			<div className="tester"></div>
+			<Header pokedexStyle={pokedexStyle ? changePokedexStyle : null} pokedexButton={pokedexButton} logo={logo} />
+			<div className="background-mon"></div>
+			<PokemonList pokemon={pokemon} pokedexStyle={pokedexStyle} listRef={ref} initSwiper={initSwiper} updateSwiper={updateSwiper} swiper={swiper} /> 
 			<Loading loading={loading} />
 		</>
 	);

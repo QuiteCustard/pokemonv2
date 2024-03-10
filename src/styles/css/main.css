@@ -300,8 +300,23 @@ h3 {
   height: calc(95dvh - 168px);
   overflow: hidden;
 }
+[data-theme=gen4] .pokemon .img-link {
+  transition: visibility 300ms;
+}
+[data-theme=gen4] .pokemon .img-link:has(~ .name-id:hover, ~ .name-id:focus) .pokemon-img {
+  filter: drop-shadow(4px 8px 17px black);
+}
+[data-theme=gen4] .pokemon .img-link:hover .pokemon-img, [data-theme=gen4] .pokemon .img-link:focus .pokemon-img {
+  filter: drop-shadow(4px 8px 17px black);
+}
+[data-theme=gen4] .pokemon .img-link:hover ~ .name-id, [data-theme=gen4] .pokemon .img-link:focus ~ .name-id {
+  background-color: var(--header-secondary);
+}
 [data-theme=gen4] .pokemon .name-id:hover, [data-theme=gen4] .pokemon .name-id:focus {
   background-color: var(--header-secondary);
+}
+[data-theme=gen4] .pokemon-img {
+  transition: filter 300ms;
 }
 @media (min-width: 1024px) {
   [data-theme=gen4] .pokemon-img {
@@ -324,7 +339,10 @@ h3 {
     left: -10%;
     background-color: var(--header-main);
   }
-  [data-theme=gen4] swiper-slide:not(.swiper-slide-active) .pokemon-img {
+  [data-theme=gen4] swiper-slide:not(.swiper-slide-active) .img-link {
+    visibility: hidden;
+  }
+  [data-theme=gen4] swiper-slide:not(.swiper-slide-active) .img-link .pokemon-img {
     opacity: 0;
   }
 }
@@ -334,10 +352,14 @@ h3 {
   width: 100%;
   overflow: hidden;
 }
+[data-theme=gen9] swiper-slide {
+  max-height: 99%;
+}
 [data-theme=gen9] .pokemon {
   grid-template-rows: 15px 100px 1fr 15px;
   grid-template-columns: unset;
   align-items: unset;
+  max-width: 214px;
 }
 [data-theme=gen9] .pokemon:hover, [data-theme=gen9] .pokemon:focus {
   background-color: #D0F447;
